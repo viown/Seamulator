@@ -45,6 +45,6 @@ struct registers {
     };
     uint16_t SP;
     uint16_t PC;
-};
+} registers;
 
 #endif // REGISTERS_H

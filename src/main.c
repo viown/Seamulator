@@ -1,12 +1,13 @@
 #include <stdio.h>
+#include <stdlib.h>
 #include "registers.h"
+#include "cpu.h"
+#include "memory.h"
 
 int main(int argc, char* argv[]) {
-    struct registers x;
-    x.A = 100;
-    x.F = 200;
-    // x.AF is 25800 because 1100100(100) + 11001000(200) = 110010011001000(25800)
-    // We never had to perform bitwise here thanks to unions.
-    printf("%d", x.AF);
+    for (size_t i = 0; i < 0xffff; ++i) {
+        set_byte(5, i);
+        printf("%d. %d\n", i, read_byte(i));
+    }
     return 0;
 }
