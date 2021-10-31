@@ -5,11 +5,14 @@
 #include "memory.h"
 
 int main(int argc, char* argv[]) {
-    unsigned char v = 0;
-    v |= (1 << 7);
-    v |= (1 << 6);
-    //v |= (1 << 5);
-    v |= (1 << 4);
-    printf("%d", v);
+    for (addr_t i = 0; i < ADDR_MAX; ++i) {
+        write(i, 50);
+        if (get_address(i) == NULL) {
+            printf("Undefined memory at %x\n", i);
+            exit(0);
+        } else {
+            printf("%d. %d\n", i, read(i));
+        }
+    }
     return 0;
 }
