@@ -4,15 +4,12 @@
 #include "cpu.h"
 #include "memory.h"
 
+uint8_t add_u8(uint8_t* address, uint8_t number);
+
 int main(int argc, char* argv[]) {
-    for (addr_t i = 0; i < ADDR_MAX; ++i) {
-        write(i, 50);
-        if (get_address(i) == NULL) {
-            printf("Undefined memory at %x\n", i);
-            exit(0);
-        } else {
-            printf("%d. %d\n", i, read(i));
-        }
-    }
+    registers.A = 100;
+    add_u8(&registers.A, 250);
+    add_u8(&registers.A, 3);
+    printf("%d\n", flag_isset(C)); // half carry flag gets set.
     return 0;
 }

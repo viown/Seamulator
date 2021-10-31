@@ -23,6 +23,10 @@ void clear_flag(enum flag_t flag) {
     registers.F &= ~(get_flag_value(flag));
 }
 
+bool flag_isset(enum flag_t flag) {
+    return registers.F & get_flag_value(flag);
+}
+
 void reset_registers() {
     // According to a redditor, these are what the registers are set to when the gameboy boots up.
     registers.A = 0x01;

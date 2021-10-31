@@ -13,26 +13,26 @@ uint8_t hram[0x80];
 uint8_t interrupt_enable_flag[0x1];
 
 uint8_t* get_address(addr_t addr) {
-    if (addr <= 0x7fff) { // 32KB
+    if (addr <= 0x7FFF) { // 32KB
         return &cartridge[addr];
     } else if (addr >= 0x8000 && addr <= 0x9FFF) { // 8KB
         return &vram[addr - 0x8000];
     } else if (addr >= 0xA000 && addr <= 0xBFFF) { // 8KB
-        return &sram[addr - 0xa000];
+        return &sram[addr - 0xA000];
     } else if (addr >= 0xC000 && addr <= 0xDFFF) { // 8KB
-        return &wram[addr - 0xd000]; 
+        return &wram[addr - 0xC000];
     } else if (addr >= 0xE000 && addr <= 0xFDFF) { // 7.68 KB
-        // Reserved Echo Ram
-        return &echo[addr - 0xe000];
-    } else if (addr >= 0xfe00 && addr <= 0xfe9f) { // 160 bytes
-        return &oam[addr - 0xfe00];
-    } else if (addr >= 0xfea0 && addr <= 0xfeff) { // 96 bytes
+        // Reserved Echo Ram, this mirrors 0xC000 - 0xDDFF
+        return &wram[addr - 0xE000];
+    } else if (addr >= 0xFE00 && addr <= 0xFE9F) { // 160 bytes
+        return &oam[addr - 0xFE00];
+    } else if (addr >= 0xFEA0 && addr <= 0xFEFF) { // 96 bytes
         // Unusable memory.
-        return &oam[addr - 0xfea0];
-    } else if (addr >= 0xff00 && addr <= 0xff7f) { // 128 bytes
-        return &io_reg[addr - 0xff00];
-    } else if (addr >= 0xff80 && addr <= 0xfffe) { // 127 bytes
-        return &hram[addr - 0xff80];
+        return &oam[addr - 0xFEA0];
+    } else if (addr >= 0xFF00 && addr <= 0xFF7F) { // 128 bytes
+        return &io_reg[addr - 0xFF00];
+    } else if (addr >= 0xFF80 && addr <= 0xFFFE) { // 127 bytes
+        return &hram[addr - 0xFF80];
     } else if (addr == 0xFFFF) { // 1 byte
         return &interrupt_enable_flag[0];
     }

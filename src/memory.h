@@ -18,7 +18,6 @@ extern uint8_t oam[0xa0]; /* sprite attribute table */
 extern uint8_t hram[0x80]; /* high ram */
 extern uint8_t interrupt_enable_flag[0x1]; // temporarily here, but should be moved when interrupts are implemented
 
-// Functions
 uint8_t* get_address(addr_t address);
 void write(addr_t addr, unsigned char value);
 uint8_t read(addr_t address);

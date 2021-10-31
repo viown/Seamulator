@@ -58,5 +58,6 @@ struct registers {
 void reset_registers();
 void set_flag(enum flag_t flag);
 void clear_flag(enum flag_t flag);
+bool flag_isset(enum flag_t flag);
 
 #endif // REGISTERS_H
